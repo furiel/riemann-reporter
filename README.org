@@ -1,1 +1,15 @@
 * riemann-reporter
+
+This script can be used to periodically send status report about various services to Riemann. Note: monitoring-plugins contains quite a few scripts that can be used with riemann-reporter.
+
+** Example
+#+BEGIN_SRC bash
+$ bin/hy riemann-reporter.hy localhost 5555 --config config.conf
+#+END_SRC
+
+The configuration file format is a csv file. The format is: service name, executable, arg1, arg2, ...
+
+For example
+#+BEGIN_EXAMPLE
+ssh,/usr/lib/monitoring-plugins/check_ssh,-H,localhost,-p,22
+#+END_EXAMPLE
