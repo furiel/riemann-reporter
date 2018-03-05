@@ -23,8 +23,6 @@
     (cond [(= retval 0) True]
           [True False]))
 
-  (defn send_state [self] 0))
-
 (defclass RiemannReporter [object]
   (defn --init-- [self host port]
     (setv self.commands [])
