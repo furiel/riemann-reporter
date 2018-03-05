@@ -11,5 +11,19 @@ The configuration file format is a csv file. The format is: service name, execut
 
 For example
 #+BEGIN_EXAMPLE
-ssh,/usr/lib/monitoring-plugins/check_ssh,-H,localhost,-p,22
+- name: ssh1
+  executable: /usr/lib/monitoring-plugins/check_ssh
+  args:
+    - "-H"
+    - "host2"
+    - "-p"
+    - "22"
+
+- name: ssh2
+  executable: /usr/lib/monitoring-plugins/check_ssh
+  args:
+    - "-H"
+    - "host2"
+    - "-p"
+    - "22"
 #+END_EXAMPLE
