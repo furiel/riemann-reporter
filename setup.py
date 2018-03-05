@@ -18,6 +18,6 @@ setup(
     },
     long_description=read('README.org'),
     install_requires=[
-        'bernhard', 'hy'
+        'bernhard', 'hy', 'pyaml'
     ],
 )

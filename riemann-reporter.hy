@@ -65,11 +65,11 @@
   (parser.parse_args))
 
 (defn read-commands-from-config [riemann-reporter config-path]
-  (import csv)
-  (with [csvfile (open config-path :newline "")]
-    (setv command-reader (csv.reader csvfile :delimiter "," :quotechar "|"))
-    (for [row command-reader]
-      (setv [service executable #* args] row)
+  (import yaml)
+  (with [yaml-file (open config-path :newline "")]
+    (setv config (yaml.safe-load yaml-file))
+    (for [item config]
+      (setv service (get item "name") executable (get item "executable") args (get item "args"))
       (setv command (Command service executable args))
       (.add-command riemann-reporter command))))
 
