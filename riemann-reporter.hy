@@ -1,4 +1,4 @@
-(import subprocess bernhard time sys)
+(import subprocess bernhard time sys socket)
 
 (defclass Command [object]
   (defn --init-- [self service executable args]
@@ -39,7 +39,7 @@
           (setv state "normal")
           (setv state "critical"))
 
-      (.send self.riemann {"host" "localhost" "service" command.service "state" state}))))
+      (.send self.riemann {"host" (socket.gethostname) "service" command.service "state" state}))))
 
 (defmacro loop [&rest body]
   `(while 1
