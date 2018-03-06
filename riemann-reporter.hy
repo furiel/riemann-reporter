@@ -6,22 +6,17 @@
     (setv self.executable executable)
     (setv self.args args))
 
-  (defn run_cmd_retval [self]
+  (defn run-cmd [self]
     (setv retval 0)
+    (setv result "")
     (try
       (setv result (subprocess.check_output
                      (list* self.executable self.args)
                      :stderr subprocess.STDOUT))
-
       (except [e subprocess.CalledProcessError]
-        (setv retval e.returncode)))
-
-    retval)
-
-  (defn run_cmd [self]
-    (setv retval (.run_cmd_retval self))
-    (cond [(= retval 0) True]
-          [True False])))
+        (setv retval e.returncode)
+        (setv result (.decode e.output "utf-8"))))
+    (, retval result)))
 
 (defclass RiemannReporter [object]
   (defn --init-- [self host port]
@@ -33,11 +28,16 @@
 
   (defn send-reports [self]
     (for [command self.commands]
-      (if (.run_cmd command)
+      (setv [returncode output] (.run-cmd command))
+
+      (if (= returncode 0)
           (setv state "normal")
           (setv state "critical"))
+
+      (setv MAXLEN 255)
+
       (try
-        (.send self.riemann {"host" (socket.gethostname) "service" command.service "state" state})
+        (.send self.riemann {"host" (socket.gethostname) "service" command.service "state" state "description" (cut output 0 MAXLEN) })
         (except [e bernhard.TransportError]
           (print e))))))
 
