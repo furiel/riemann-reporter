@@ -21,7 +21,7 @@
   (defn run_cmd [self]
     (setv retval (.run_cmd_retval self))
     (cond [(= retval 0) True]
-          [True False]))
+          [True False])))
 
 (defclass RiemannReporter [object]
   (defn --init-- [self host port]
