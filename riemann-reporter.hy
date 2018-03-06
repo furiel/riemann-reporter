@@ -36,8 +36,10 @@
       (if (.run_cmd command)
           (setv state "normal")
           (setv state "critical"))
-
-      (.send self.riemann {"host" (socket.gethostname) "service" command.service "state" state}))))
+      (try
+        (.send self.riemann {"host" (socket.gethostname) "service" command.service "state" state})
+        (except [e bernhard.TransportError]
+          (print e))))))
 
 (defmacro loop [&rest body]
   `(while 1
