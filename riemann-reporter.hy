@@ -56,7 +56,7 @@
      (except [e KeyboardInterrupt]
        (print "Exiting ..."))))
 
-(defn parse-parameters()
+(defn parse-parameters []
   (import argparse)
   (setv parser (argparse.ArgumentParser))
   (.add-argument parser "host")
