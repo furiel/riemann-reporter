@@ -11,7 +11,7 @@
     (setv result "")
     (try
       (setv result (subprocess.check_output
-                     (list* self.executable self.args)
+                     (+ [self.executable] self.args)
                      :stderr subprocess.STDOUT))
       (except [e subprocess.CalledProcessError]
         (setv retval e.returncode)
@@ -56,7 +56,7 @@
      (except [e KeyboardInterrupt]
        (print "Exiting ..."))))
 
-(defn parse-parameters()
+(defn parse-parameters []
   (import argparse)
   (setv parser (argparse.ArgumentParser))
   (.add-argument parser "host")
