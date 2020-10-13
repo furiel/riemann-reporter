@@ -38,7 +38,7 @@
 
       (try
         (.send self.riemann {"host" (socket.gethostname) "service" command.service "state" state "description" (cut output 0 MAXLEN) })
-        (except [e bernhard.TransportError]
+        (except [e Exception]
           (print e))))))
 
 (defmacro loop [&rest body]
