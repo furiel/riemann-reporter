@@ -1,7 +1,7 @@
 (import subprocess bernhard time sys socket)
 
 (defclass Command [object]
-  (defn --init-- [self service executable args]
+  (defn __init__ [self service executable args]
     (setv self.service service)
     (setv self.executable executable)
     (setv self.args args))
@@ -19,7 +19,7 @@
     (, retval result)))
 
 (defclass RiemannReporter [object]
-  (defn --init-- [self host port]
+  (defn __init__ [self host port]
     (setv self.commands [])
     (setv self.riemann (.Client bernhard :host host :port port)))
 
@@ -41,16 +41,16 @@
         (except [e Exception]
           (print e))))))
 
-(defmacro loop [&rest body]
+(defmacro loop [#* body]
   `(while 1
      (do ~@body)))
 
-(defmacro periodically [seconds &rest body]
+(defmacro periodically [seconds #* body]
   `(loop
      (do ~@body
          (time.sleep ~seconds))))
 
-(defmacro mainloop [&rest body]
+(defmacro mainloop [#* body]
   `(try
      (do ~@body)
      (except [e KeyboardInterrupt]
