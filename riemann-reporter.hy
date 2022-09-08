@@ -16,7 +16,7 @@
       (except [e subprocess.CalledProcessError]
         (setv retval e.returncode)
         (setv result (.decode e.output "utf-8"))))
-    (, retval result)))
+    #(retval result)))
 
 (defclass RiemannReporter [object]
   (defn __init__ [self host port]
