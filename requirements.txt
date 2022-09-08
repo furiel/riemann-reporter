@@ -1,0 +1,4 @@
+hy==0.24.0
+bernhard==0.2.6
+protobuf==3.20.1 # https://github.com/b20n/bernhard/issues/35
+pyaml==21.10.1
