@@ -2,6 +2,14 @@
 
 This script can be used to periodically send status report about various services to Riemann. Note: monitoring-plugins contains quite a few scripts that can be used with riemann-reporter.
 
+** Setup
+#+BEGIN_SRC bash
+python3 -m pip install virtualenv
+virtualenv .
+source bin/activate
+python3 -m pip install -r requirements.txt
+#+END_SRC
+
 ** Example
 #+BEGIN_SRC bash
 $ bin/hy riemann-reporter.hy localhost 5555 --config config.conf

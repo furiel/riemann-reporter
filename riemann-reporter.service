@@ -5,7 +5,7 @@ After=network.target
 [Service]
 Type=simple
 WorkingDirectory=/srv/riemann-reporter
-ExecStart=/bin/hy riemann-reporter.hy localhost 5555 --config config.conf
+ExecStart=[path-of-virutalenv]/bin/hy riemann-reporter.hy localhost 5555 --config config.conf
 Restart=on-abort
 
 [Install]
